@@ -66,7 +66,7 @@ func (r *PodReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 
-	log.Info("pod object:", obj)
+	log.Info("pod object:", "pod object", obj)
 	// TODO(user): your logic here
 
 	return ctrl.Result{}, nil
