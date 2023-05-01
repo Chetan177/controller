@@ -19,11 +19,12 @@ package controller
 import (
 	"context"
 
-	appsv1 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
+
+	appsv1 "controller/api/v1"
 )
 
 // PodControllerReconciler reconciles a PodController object
@@ -32,9 +33,9 @@ type PodControllerReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=apps,resources=podcontrollers,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=apps,resources=podcontrollers/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=apps,resources=podcontrollers/finalizers,verbs=update
+//+kubebuilder:rbac:groups=apps.controller.demo,resources=podcontrollers,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=apps.controller.demo,resources=podcontrollers/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=apps.controller.demo,resources=podcontrollers/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

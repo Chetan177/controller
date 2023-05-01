@@ -31,6 +31,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
+	appsv1 "controller/api/v1"
 	"controller/internal/controller"
 	//+kubebuilder:scaffold:imports
 )
@@ -43,6 +44,7 @@ var (
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
+	utilruntime.Must(appsv1.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
