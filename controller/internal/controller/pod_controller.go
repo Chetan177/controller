@@ -51,6 +51,8 @@ type PodReconciler struct {
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.14.4/pkg/reconcile
 func (r *PodReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	log := r.Log.WithValues("pod", req.NamespacedName)
+	log.Info("reconciler start")
+
 	obj := &corev1.Pod{}
 
 	if err := r.Client.Get(ctx, req.NamespacedName, obj); err != nil {
@@ -64,7 +66,7 @@ func (r *PodReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 
-	_ = r.Log.WithValues("pod object", obj)
+	log.Info("pod object:", obj)
 	// TODO(user): your logic here
 
 	return ctrl.Result{}, nil
