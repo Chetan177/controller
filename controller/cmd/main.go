@@ -31,7 +31,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	appsv1 "controller/api/v1"
 	"controller/internal/controller"
 	//+kubebuilder:scaffold:imports
 )
@@ -44,7 +43,6 @@ var (
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
-	utilruntime.Must(appsv1.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
@@ -89,11 +87,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controller.PodControllerReconciler{
+	if err = (&controller.PodReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "PodController")
+		setupLog.Error(err, "unable to create controller", "controller", "Pod")
 		os.Exit(1)
 	}
 	//+kubebuilder:scaffold:builder
